@@ -19,12 +19,32 @@ class ContactList extends React.Component {
     } else console.log(`${contacts[num]} is already in the table`)
   }
 
+  sortByName = () => {
+    
+    this.setState({
+      cnts: this.state.cnts.sort(function(a,b){
+        if(a.name < b.name) return -1
+        if(a.name > b.name) return 1
+        return 0
+      })
+    })
+
+  }
+
+  sortByPopularity = () => {
+    this.setState({
+      cnts: this.state.cnts.sort((a,b) => b.popularity-a.popularity)
+    })
+  }
+
   render() {
-    console.log(contacts);
     return (
       <div className="contact-list">
 
         <button onClick={this.addRandomContact}> Add Random Contact</button>
+        <button onClick={this.sortByName}>Sort by name</button>
+        <button onClick={this.sortByPopularity}>Sort by popularity</button>
+        
         <tr className="contact">
           <th>Picture</th>
           <th>Name</th>
