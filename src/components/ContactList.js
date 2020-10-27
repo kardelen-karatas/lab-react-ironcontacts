@@ -37,6 +37,14 @@ class ContactList extends React.Component {
     })
   }
 
+  deleteContact = (contactToDelete) => {
+    this.setState({
+      cnts: this.state.cnts.filter(function(contact){
+        return contact.id !== contactToDelete.id
+      })
+    })
+  }
+
   render() {
     return (
       <div className="contact-list">
@@ -49,6 +57,7 @@ class ContactList extends React.Component {
           <th>Picture</th>
           <th>Name</th>
           <th>Popularity</th>
+          <th>Action</th>
         </tr>
 
         {this.state.cnts.map((contact) => (
@@ -58,6 +67,9 @@ class ContactList extends React.Component {
             </td>
             <td>{contact.name}</td>
             <td>{contact.popularity}</td>
+            <td>
+             <button onClick={() => this.deleteContact(contact)}>Delete</button> 
+            </td>
           </tr>
         ))}
       </div>
